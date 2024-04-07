@@ -14,11 +14,11 @@ mongoose.connect('mongodb+srv://maleesha619:Maleesha123@prouduct.cn8oo2g.mongodb
 
 // Define Product Schema
 const ProductSchema = new mongoose.Schema({
-  name: String,
-  img_path: String,
-  price: Number,
-  category: String,
-  gender: String,
+  name: {type: String, required: true},
+  img_path: {type: String, required: true},
+  price: {type: Number, required: true},
+  category: {type: String, required: true},
+  gender: {type: String, required: true},
 });
 
 // Create Product model
@@ -30,8 +30,8 @@ app.use(express.json());
 // Route to get all products
 app.get('/api/products', async (req, res) => {
   try {
-    const products = await Product.find();
-    res.json(products);
+    const products = await Product.find({});
+    res.status(201).json(products);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
